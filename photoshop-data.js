@@ -85,5 +85,47 @@ const photoshopBookData = [
                 imgSrc: "images/ps-10-export.jpg"
             }
         ]
+    },
+    {
+        id: "chapter5",
+        title: "Chapter 5: Graphics Designing Basics",
+        topics: [
+            {
+                heading: "Color Selection and Font Style",
+                text: "A good design needs readable text. Never put dark text on a dark background. Always use contrasting colors (like Yellow text on a Blue background). In Photoshop, click the 'Character' panel to change fonts. You can even install regional fonts (like Odia or Hindi) on your computer, and Photoshop will let you type marriage cards in your local language!",
+                shortcut: "Ctrl + T (To transform, resize, and freely rotate your text)",
+                imgSrc: "images/ps-11-fonts-colors.jpg"
+            },
+            {
+                heading: "Social Media Posts & Invitations",
+                text: "When making a post for Facebook or Instagram, you need a perfect square. Press Ctrl+N (New Document), set Width to 1080 Pixels, Height to 1080 Pixels, and Resolution to 72. Drag in a background photo, add colorful text, and export as a JPG. This is exactly how professional digital marketing agencies create daily social media ads.",
+                shortcut: "Always use 'Pixels' for digital screens and web designs.",
+                imgSrc: "images/ps-12-social-media.jpg"
+            },
+            {
+                heading: "Festival Banner & Shop Board Design",
+                text: "Designing a massive shop board is different from a small photo! Press Ctrl+N. Change the measurement from Pixels to 'Inches'. If the shop owner wants a 6-foot by 3-foot flex board, enter Width as 72 inches (6x12) and Height as 36 inches (3x12). Set Resolution to 72. Now you have a massive digital canvas ready for large-scale flex printing.",
+                shortcut: "1 Foot = 12 Inches. Always calculate flex boards in inches.",
+                imgSrc: "images/ps-13-banners.jpg"
+            }
+        ]
+    },
+    {
+        id: "chapter6",
+        title: "Chapter 6: Print Production & Modern Apps",
+        topics: [
+            {
+                heading: "Marriage Cards & Print Formats",
+                text: "When designing a Marriage Card, you must use the 'CMYK' color mode. RGB is for computer screens, but printing presses use CMYK (Cyan, Magenta, Yellow, Black) ink. Go to Image > Mode > CMYK Color before saving. To print exactly on standard paper, set your document size to A4 (210 x 297 mm) with a 300 Resolution for maximum crispness.",
+                shortcut: "Always leave a 0.5-inch blank 'bleed' margin on the edges so the printer doesn't cut your text off.",
+                imgSrc: "images/ps-14-marriage-cards.jpg"
+            },
+            {
+                heading: "The Modern Exception: Canva & Mobile Apps",
+                text: "Photoshop is powerful, but what if a customer needs an urgent design in 5 minutes? This is where Canva comes in! Canva is a free website and mobile app filled with thousands of ready-made templates. Instead of drawing from scratch, you drag and drop photos and change the text. Professional operators use Photoshop for heavy printing, but use Canva for lightning-fast digital posters.",
+                shortcut: "You can download Canva on your Android phone to design posters anywhere, anytime.",
+                imgSrc: "images/ps-15-canva-apps.jpg"
+            }
+        ]
     }
 ];
