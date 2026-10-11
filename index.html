@@ -1,54 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>
-        // Universal Gatekeeper Script
-        if (localStorage.getItem('excellent_auth') !== 'true') {
-            document.addEventListener("DOMContentLoaded", function() {
-                document.body.style.visibility = "hidden"; 
-                document.body.style.overflow = "hidden";
-                
-                const lockDiv = document.createElement('div');
-                lockDiv.style.cssText = "position:fixed; top:0; left:0; width:100vw; height:100vh; background:#0f172a; z-index:9999999; display:flex; flex-direction:column; align-items:center; justify-content:center; color:white; font-family:'Inter', sans-serif; visibility:visible;";
-                
-                lockDiv.innerHTML = `
-                    <div style="background:#1e293b; padding:40px; border-radius:12px; text-align:center; box-shadow:0 25px 50px -12px rgba(0,0,0,0.5); border: 1px solid #334155; max-width:90%; width:400px;">
-                        <h2 style="margin-bottom:10px; color:#10b981; font-size:1.8rem;">Restricted Access 🛡️</h2>
-                        <p style="color:#94a3b8; margin-bottom:25px; line-height:1.5;">This portal is strictly for registered students of Excellent Institute.</p>
-                        
-                        <input type="email" id="authEmail" placeholder="Enter Authorized Email" style="width:100%; padding:14px; margin-bottom:20px; border-radius:8px; border:2px solid #334155; background:#0f172a; color:white; text-align:center; outline:none; font-size:1.1rem; transition: border-color 0.2s;">
-                        
-                        <button onclick="verifyAccess()" style="width:100%; padding:14px; background:#10b981; color:white; border:none; border-radius:8px; font-size:1.1rem; font-weight:bold; cursor:pointer; transition: background 0.2s;">
-                            Verify Connection
-                        </button>
-                        
-                        <div id="authError" style="display:none; background-color: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; padding: 15px; border-radius: 8px; color:#fca5a5; margin-top:20px; font-weight:600; line-height:1.5;">
-                            ❌ Access Denied.<br><br>Please use the Excellent Institute mobile APK to view this content.
-                        </div>
-                    </div>
-                `;
-                document.documentElement.appendChild(lockDiv);
-
-                window.verifyAccess = function() {
-                    const emailInput = document.getElementById('authEmail').value.toLowerCase().trim();
-                    const inputBox = document.getElementById('authEmail');
-                    
-                    if (emailInput === 'excellent.institut@gmail.com') { 
-                        localStorage.setItem('excellent_auth', 'true');
-                        lockDiv.remove();
-                        document.body.style.visibility = "visible";
-                        document.body.style.overflow = "auto";
-                    } else {
-                        document.getElementById('authError').style.display = "block";
-                        inputBox.style.borderColor = "#ef4444";
-                    }
-                };
-            });
-        }
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excellent Institute - Photoshop & Image Editing</title>
+    <title>Excellent Institute - Study Module</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
@@ -205,7 +160,7 @@
         .hero h1 { font-size: 2.5rem; color: var(--text-main); margin-bottom: 10px; }
         .hero p { color: var(--text-muted); font-size: 1.1rem; }
         
-        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; pointer-events: auto; }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; pointer-events: auto; }
         .module-card {
             background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
             padding: 24px; cursor: pointer; transition: all 0.3s ease; box-shadow: var(--shadow-sm);
@@ -239,16 +194,31 @@
             z-index: 9999; border-radius: 50%; object-fit: cover;
         }
 
-        /* Responsive */
+        /* 📱 ENHANCED MOBILE RESPONSIVENESS */
         @media (max-width: 768px) {
             .main-container { flex-direction: column; }
-            .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); flex-direction: row; overflow-x: auto; padding: 12px; gap: 10px;}
+            .sidebar { 
+                width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); 
+                flex-direction: row; overflow-x: auto; padding: 12px; gap: 10px;
+                /* Hide scrollbar for cleaner look on mobile */
+                scrollbar-width: none; 
+            }
+            .sidebar::-webkit-scrollbar { display: none; }
             .sidebar.collapsed { height: 0; padding: 0; border: none; opacity: 0; }
             .nav-label { display: none; }
-            .nav-btn { white-space: nowrap; padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border); }
-            .content-area { padding: 20px 15px; }
-            .content-wrapper { padding: 25px 20px; }
-            .watermark-bg { width: 70vw; }
+            .nav-btn { white-space: nowrap; padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border); font-size: 0.85rem; }
+            
+            .content-area { padding: 15px 10px; }
+            .content-wrapper { padding: 25px 20px; width: 100%; }
+            
+            .hero h1 { font-size: 1.8rem; }
+            .hero p { font-size: 0.95rem; }
+            .note-section h1 { font-size: 1.6rem; }
+            .note-section h3 { font-size: 1.2rem; }
+            .note-section p, .note-section li { font-size: 1rem; }
+            
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .watermark-bg { width: 75vw; }
         }
 
         @media print {
@@ -301,27 +271,37 @@
         <img id="lightbox-img" src="" alt="Enlarged view" onclick="toggleZoom(event)">
     </div>
 
-    <script src="photoshop-data.js"></script>
+    <!-- 🚨 NEW: Standardized Data Import -->
+    <script src="data.js"></script>
     
     <script>
         const navContainer = document.getElementById('nav-container');
         const contentDisplay = document.getElementById('content-display');
         const sidebar = document.getElementById('main-sidebar');
 
-        // Global DCA Lock Variable
-        let isDcaUnlocked = false; 
+        // Global Password Lock Variable
+        let isModuleUnlocked = false; 
+
+        // 🚨 UNIVERSAL DATA DETECTOR: Works with any subject's variable name!
+        function getCourseData() {
+            if (typeof photoshopBookData !== 'undefined') return photoshopBookData;
+            if (typeof tallyData !== 'undefined') return tallyData;
+            if (typeof courseBookData !== 'undefined') return courseBookData;
+            if (typeof chapterData !== 'undefined') return chapterData;
+            return null;
+        }
 
         function initApp() {
-            if (typeof photoshopBookData === 'undefined') {
+            const courseData = getCourseData();
+            if (!courseData) {
                 contentDisplay.innerHTML = `<h2 style="color:red; text-align:center; padding:50px;">Awaiting Data File...</h2>`;
                 return;
             }
-            photoshopBookData.forEach((chapter, index) => {
+            courseData.forEach((chapter, index) => {
                 const btn = document.createElement('button');
                 btn.className = 'nav-btn note-nav-btn';
                 
-                // Everything is DCA locked
-                let displayIcon = isDcaUnlocked ? '🎨' : '🔒';
+                let displayIcon = isModuleUnlocked ? '🎨' : '🔒';
                 btn.innerHTML = `${displayIcon} ${chapter.title.split(':')[0]}`; 
                 
                 btn.onclick = () => loadContent(index, btn);
@@ -339,10 +319,10 @@
 
             let html = `
             <div class="content-wrapper allow-select" style="text-align: center; margin-top: 5vh;">
-                <h1 style="font-size: 2.8rem; color: var(--primary); margin-bottom: 10px;">Photoshop & Image Editing</h1>
-                <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 30px;">DCA Exclusive: Master document digitization and professional photo editing.</p>
+                <h1 style="font-size: 2.8rem; color: var(--primary); margin-bottom: 10px;">Study Studio</h1>
+                <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 30px;">Master your syllabus interactively.</p>
                 
-                <img src="images/ps-preview.jpg" alt="App Preview" style="width: 100%; max-width: 500px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); border: 2px solid var(--border); margin-bottom: 40px; cursor: zoom-in;" onclick="openLightbox(this.src)">
+                <img src="images/ps-preview.jpg" alt="App Preview" style="width: 100%; max-width: 500px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); border: 2px solid var(--border); margin-bottom: 40px; cursor: zoom-in;" onclick="openLightbox(this.src)" onerror="this.style.display='none'">
                 <br>
                 
                 <button onclick="loadDashboard()" style="background-color: var(--primary); color: white; border: none; padding: 15px 40px; font-size: 1.2rem; border-radius: 8px; cursor: pointer; font-weight: bold; box-shadow: var(--shadow-md);">
@@ -361,23 +341,25 @@
             let html = `
             <div class="content-wrapper allow-select">
                 <div class="hero">
-                    <h1>Adobe Photoshop 7.0 Studio</h1>
-                    <p>Learn to crop, clean, and master digital image manipulation.</p>
+                    <h1>Interactive Study Studio</h1>
+                    <p>Learn and master digital applications easily.</p>
                 </div>
                 <div class="dashboard-grid">`;
             
-            const icons = ['🖼️', '✂️', '📸', '🖌️'];
-            if (typeof photoshopBookData !== 'undefined') {
-                photoshopBookData.forEach((chapter, index) => {
-                    let isLocked = !isDcaUnlocked;
+            const icons = ['🖼️', '✂️', '📸', '🖌️', '📊', '💻', '📝'];
+            const courseData = getCourseData();
+
+            if (courseData) {
+                courseData.forEach((chapter, index) => {
+                    let isLocked = !isModuleUnlocked;
                     let icon = isLocked ? '🔒' : icons[index % icons.length];
-                    let lockedText = isLocked ? '<span style="color:#ef4444; font-size:0.9rem;"> (DCA Locked)</span>' : '';
+                    let lockedText = isLocked ? '<span style="color:#ef4444; font-size:0.9rem;"> (Locked)</span>' : '';
                     
                     html += `
                         <div class="module-card" onclick="document.querySelectorAll('.note-nav-btn')[${index}].click()">
                             <div class="card-icon">${icon}</div>
                             <h3>${chapter.title}${lockedText}</h3>
-                            <span>${chapter.topics.length} Design Topics</span>
+                            <span>${chapter.topics.length} Topics</span>
                         </div>`;
                 });
             }
@@ -391,22 +373,22 @@
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             if(clickedBtn) clickedBtn.classList.add('active');
 
-            // --- DCA Lock for All Chapters ---
-            if (!isDcaUnlocked) {
+            // --- Password Lock for All Chapters ---
+            if (!isModuleUnlocked) {
                 let lockHtml = `
                 <div class="content-wrapper allow-select" style="text-align: center; padding: 80px 20px;">
                     <div style="font-size: 5rem; margin-bottom: 10px;">🔒</div>
-                    <h2 style="color: var(--primary); font-size: 2rem;">DCA Module Locked</h2>
-                    <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 25px;">Please enter the DCA password to access professional Photoshop tutorials.</p>
+                    <h2 style="color: var(--primary); font-size: 2rem;">Module Locked</h2>
+                    <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 25px;">Please enter the password to access these tutorials.</p>
                     
-                    <input type="password" id="dcaPass" placeholder="Password" style="padding: 12px; font-size: 1.2rem; border: 2px dashed var(--primary); border-radius: 8px; width: 100%; max-width: 250px; text-align: center; outline: none;">
+                    <input type="password" id="modulePass" placeholder="Password" style="padding: 12px; font-size: 1.2rem; border: 2px dashed var(--primary); border-radius: 8px; width: 100%; max-width: 250px; text-align: center; outline: none;">
                     <br><br>
                     
-                    <button onclick="checkDcaPassword(${index})" style="background-color: var(--primary); color: white; border: none; padding: 12px 40px; font-size: 1.1rem; border-radius: 8px; cursor: pointer; font-weight: bold; box-shadow: var(--shadow-md);">
+                    <button onclick="checkModulePassword(${index})" style="background-color: var(--primary); color: white; border: none; padding: 12px 40px; font-size: 1.1rem; border-radius: 8px; cursor: pointer; font-weight: bold; box-shadow: var(--shadow-md);">
                         Unlock 🔓
                     </button>
                     
-                    <p id="wrong-dca-msg" style="color: #ef4444; font-weight: bold; margin-top: 15px; display: none;">❌ Incorrect Password!</p>
+                    <p id="wrong-pass-msg" style="color: #ef4444; font-weight: bold; margin-top: 15px; display: none;">❌ Incorrect Password!</p>
                 </div>`;
                 
                 contentDisplay.innerHTML = lockHtml;
@@ -417,7 +399,8 @@
             }
 
             // Normal Content Loading
-            const chapter = photoshopBookData[index];
+            const courseData = getCourseData();
+            const chapter = courseData[index];
 
             let htmlContent = `
             <div class="content-wrapper">
@@ -450,12 +433,12 @@
             }
         }
 
-        function checkDcaPassword(index) {
-            const input = document.getElementById('dcaPass').value.trim().toUpperCase(); 
+        function checkModulePassword(index) {
+            const input = document.getElementById('modulePass').value.trim().toUpperCase(); 
+            // 🚨 You can change "DCA" to whatever password you want here
             if (input === "DCA") {
-                isDcaUnlocked = true; 
+                isModuleUnlocked = true; 
                 
-                // Instantly turn all 🔒 into 🎨 in the sidebar
                 document.querySelectorAll('.note-nav-btn').forEach((btn, i) => {
                     btn.innerHTML = btn.innerHTML.replace('🔒', '🎨');
                 });
@@ -463,7 +446,7 @@
                 const btn = document.querySelectorAll('.note-nav-btn')[index];
                 loadContent(index, btn); 
             } else {
-                document.getElementById('wrong-dca-msg').style.display = 'block'; 
+                document.getElementById('wrong-pass-msg').style.display = 'block'; 
             }
         }
 
