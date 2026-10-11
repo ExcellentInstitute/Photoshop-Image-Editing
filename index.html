@@ -292,6 +292,7 @@
         }
 
         function initApp() {
+            if (window.location.hash === '#admin') isModuleUnlocked = true;
             const courseData = getCourseData();
             if (!courseData) {
                 contentDisplay.innerHTML = `<h2 style="color:red; text-align:center; padding:50px;">Awaiting Data File...</h2>`;
